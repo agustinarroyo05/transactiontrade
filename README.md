@@ -1,6 +1,6 @@
 # Transaction Trade
 
-Run Trade Manager:
+Run Trade Transaction Trade:
 
 Clone the project to an specific location: Open a terminal and change the directory to the specific location.
 
