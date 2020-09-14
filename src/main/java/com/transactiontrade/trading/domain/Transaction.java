@@ -1,18 +1,41 @@
 package com.transactiontrade.trading.domain;
 
 import java.time.LocalDateTime;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Transaction {
 	
-	public enum Type {DEBIT, CREDIT};
-
+	public enum Type {
+		
+		DEBIT(){
+			
+			public int getAmmount(int value) {
+				return value;
+			}
+			
+		}, 
+		CREDIT(){
+			
+			public int getAmmount(int value) {
+				return -1 * value;
+			}
+		};
+		
+		private static final Map<String, Type> stringToEnum =
+			Stream.of(values()).collect(Collectors.toMap(Object::toString, e -> e));
+	
+		public abstract int getAmmount(int value);
+	}
+	
 	private String Id;
 	private int amount;
 	private Type txType;
 	private LocalDateTime efectiveDate;
 	
 	public int getAmount() {
-		return amount;
+		return txType.getAmmount(amount);
 	}
 	public void setAmount(int amount) {
 		this.amount = amount;
@@ -26,8 +49,15 @@ public class Transaction {
 	public Type getType() {
 		return txType;
 	}
-	public void setType(Type txType) {
-		this.txType = txType;
+	
+	public void setType(Type type) {
+		txType = type;
+	}
+	public void setType(String type) {
+		Type validType = Type.stringToEnum.get(type);
+		if (validType != null) {
+			throw new RuntimeException("Invalid Exception");
+		}
 	}
 	public String getEfectiveDate() {
 		return efectiveDate.toString();

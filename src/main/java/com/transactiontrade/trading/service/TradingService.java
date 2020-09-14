@@ -30,18 +30,10 @@ public class TradingService {
 			writeLock.lock();
 			int newCredit = account.getCredit();
 			Transaction tx = new Transaction();
-			switch(txDTO.getType()) {
-	    		case "DEBIT":
-	    			if (account.getCredit() - txDTO.getAmount() < 0) { 
-		    			throw new CreditException();
-					}
-	    			newCredit = account.getCredit() - txDTO.getAmount();
-	    			tx.setType(Transaction.Type.DEBIT);
-	    			break;
-	    		case "CREDIT":
-	    			newCredit = account.getCredit() + txDTO.getAmount();
-	    			tx.setType(Transaction.Type.CREDIT);
-	    			break;
+			tx.setType(txDTO.getType());
+			newCredit = account.getCredit() + txDTO.getAmount();
+			if (account.getCredit() > 0 && (newCredit < 0)) { 
+    			throw new CreditException();
 			}
 	    	account.setCredit(newCredit);
 			tx.setAmount(txDTO.getAmount());
