@@ -3,8 +3,6 @@ package com.transactontrade.tests;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.junit.Before;
@@ -41,9 +39,9 @@ public class TradingServiceTest {
 	public void createAndGetTansactionTest(){
 		try {
 			service.createTansaction(account, txDto);
-			assertTrue(service.getTransaction("1").getAmount() == TX_AMMOUNT);
+			assertTrue(service.getTransaction("1").getAmount() == -1 * TX_AMMOUNT);
 			List<Transaction> txs = (List<Transaction>)service.getTransactionHistory(); 
-			assertTrue(txs.get(0).getAmount() == TX_AMMOUNT);
+			assertTrue(txs.get(0).getAmount() == -1 * TX_AMMOUNT);
 			assertTrue(txs.get(0).getId().equals("1"));
 			
 		} catch (CreditException e) {

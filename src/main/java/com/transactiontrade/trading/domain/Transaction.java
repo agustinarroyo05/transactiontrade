@@ -12,14 +12,14 @@ public class Transaction {
 		DEBIT(){
 			
 			public int getAmmount(int value) {
-				return value;
+				return -1 * value;
 			}
 			
 		}, 
 		CREDIT(){
 			
 			public int getAmmount(int value) {
-				return -1 * value;
+				return value;
 			}
 		};
 		
@@ -35,10 +35,10 @@ public class Transaction {
 	private LocalDateTime efectiveDate;
 	
 	public int getAmount() {
-		return txType.getAmmount(amount);
+		return amount;
 	}
 	public void setAmount(int amount) {
-		this.amount = amount;
+		this.amount = txType.getAmmount(amount);
 	}
 	public String getId() {
 		return Id;
@@ -55,9 +55,10 @@ public class Transaction {
 	}
 	public void setType(String type) {
 		Type validType = Type.stringToEnum.get(type);
-		if (validType != null) {
+		if (validType == null) {
 			throw new RuntimeException("Invalid Exception");
 		}
+		txType = validType;
 	}
 	public String getEfectiveDate() {
 		return efectiveDate.toString();

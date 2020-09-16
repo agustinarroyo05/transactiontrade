@@ -31,12 +31,12 @@ public class TradingService {
 			int newCredit = account.getCredit();
 			Transaction tx = new Transaction();
 			tx.setType(txDTO.getType());
-			newCredit = account.getCredit() + txDTO.getAmount();
+			tx.setAmount(txDTO.getAmount());
+			newCredit = account.getCredit() + tx.getAmount();
 			if (account.getCredit() > 0 && (newCredit < 0)) { 
     			throw new CreditException();
 			}
 	    	account.setCredit(newCredit);
-			tx.setAmount(txDTO.getAmount());
 	    	tx.setId(String.valueOf(++txId));
 	    	tx.setEfectiveDate(LocalDateTime.now());
 	    	
