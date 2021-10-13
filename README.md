@@ -18,7 +18,7 @@ To get a particular transaction use the browser. open the following URL replacin
 
 To get the account balance use the browser with the following query http://localhost:8080/transactiontrade/accountbalance
 
-To refresh the transaction history, refresh the browser window at http://localhost:8080:
+To refresh the transaction history, refresh the browser window at http://localhost:8080
 
 Ro run the test, in your project directoty type:
 
