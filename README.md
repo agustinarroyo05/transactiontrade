@@ -23,3 +23,4 @@ To refresh the transaction history, refresh the browser window at http://localho
 Ro run the test, in your project directoty type:
 
 mvn test
+---------------
